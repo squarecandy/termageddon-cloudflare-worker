@@ -2,6 +2,12 @@
 
 This Cloudflare Worker sets the `tu-geoip-hide` cookie based on visitor geolocation to prevent unnecessary admin-ajax calls on every page load.
 
+## Who is this for?
+
+This setup is advanced and is appropriate for sites that already use Cloudflare for page caching and see traffic spikes of 100s or 1000s of visitors in short timeframes. If you're using Cloudflare caching but have the Termageddon plugin setting "Enable page caching support via AJAX" turned on - you'll see in your logs that each visitor is still generating an admin-ajax call to get the location data. This setup resolves that issue by using Cloudflare Workers instead of your own server resources to do that check.
+
+The complexity of setting up and maintaining this system would be overkill for most low traffic sites.
+
 ## How It Works
 
 1. **First visit**: Worker detects no cookie → Sets `tu-geoip-hide` cookie based on location
