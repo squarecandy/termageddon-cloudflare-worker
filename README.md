@@ -8,6 +8,8 @@ This setup is advanced and is appropriate for sites that already use Cloudflare 
 
 The complexity of setting up and maintaining this system would be overkill for most low traffic sites.
 
+Also, if you're not using any Page caching at all, you don't need this - just disable the AJAX toggle in the plugin geolocation settings instead.
+
 ## How It Works
 
 1. **First visit**: Worker detects no cookie → Sets `tu-geoip-hide` cookie based on location
@@ -26,7 +28,7 @@ The complexity of setting up and maintaining this system would be overkill for m
 7. After deployment, click **Edit Code** (top right)
 8. In the code editor, select all the default code and delete it
 9. Copy and paste the entire contents of `cloudflare-worker.js` into the editor
-10. Edit the values at the top to match your site's show/hide settings. You can come back here and edit these anytime. Note that the plugin's toggles will NOT update these anymore. You need to set them here if you're going to use this cloud
+10. Edit the values at the top to match your site's show/hide settings. You can come back here and edit these anytime. Note that the plugin's toggles will NOT update these anymore. You need to set them here if you're going to use this system.
 11. Click **Save and Deploy**
 
 ### 2. Add Worker Route
@@ -36,7 +38,7 @@ The complexity of setting up and maintaining this system would be overkill for m
 1. Click **Add Route**
 1. **Route**: `example.com/*` (or `*.example.com/*` for all subdomains)
 1. **Worker**: Select the worker you created above
-1. Be sure to select fail mode **Fail open (proceed)** - this will allow the system to fall back to the normal server-size admin-ajax system if you hit your 100k daily limit
+1. Be sure to select fail mode: **Fail open (proceed)** - this will allow the system to fall back to the normal server-side admin-ajax.php system if you hit your 100k daily limit
 1. Click **Save**
 
 **Performance note:** 
